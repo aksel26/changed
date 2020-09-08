@@ -1,0 +1,134 @@
+I"g&<h1 id="카드게임">카드게임</h1>
+
+<h3 id="코드">코드</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+    <span class="c1">// 최솟값 비교 변수</span>
+    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+    <span class="c1">// 최댓값 비교 변수</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+
+    <span class="c1">// 결과값</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// 2차 배열</span>
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">m</span><span class="p">];</span>
+
+    <span class="c1">// 각 행마다의 최솟값을 담을 배열</span>
+    <span class="kt">int</span> <span class="n">temp</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+
+    <span class="c1">// 행, 열 수 입력</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+
+    <span class="c1">// 각 행, 열 값 넣기</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+
+            <span class="c1">// 각 행마다의 최솟값을 구한다.</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">min</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">min</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+            <span class="p">}</span>
+
+            <span class="c1">// 최솟값을 임시 배열에 넣는다.</span>
+            <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// 다음 행에서의 비교를 위해 초기화</span>
+        <span class="n">min</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 임시배열 안에서의 최댓값 구하기</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 결과 출력</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="해결-방법">해결 방법</h4>
+
+<ol>
+  <li>2차원 배열을 만들고,</li>
+  <li>그 안에 값을 넣는다.</li>
+  <li>각 행마다 최솟값을 구하고</li>
+  <li>그 최솟값을 임시 배열에 넣는 방법을 반복</li>
+  <li>임시배열 안에서의 최댓값을 구한다.</li>
+</ol>
+
+<p><br /></p>
+
+<h5 id="참고용">참고용</h5>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">minVal</span> <span class="o">=</span> <span class="mi">10001</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+            <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">;</span>
+
+            <span class="n">minVal</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">minVal</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">minVal</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<ul>
+  <li>
+    <p>2차원 배열까지 생각하지 않아도 됬었다.</p>
+
+    <p>–&gt; <em>행렬의 위치 정보가 중요한 것도 아니니까</em></p>
+  </li>
+  <li>
+    <p><strong>Min,Max 함수</strong>를 이용해서 최대, 최솟값을 구하고 약간 <strong>재귀개념</strong>을 활용한 것 같다.</p>
+    <ul>
+      <li>코딩할때도 결과 값을 바로 다음 수와 비교하고 싶었는데 막혔다..  이럴 경우 재귀 개념을 잘 활용하면 될 것 같다.</li>
+    </ul>
+  </li>
+</ul>
+:ET
