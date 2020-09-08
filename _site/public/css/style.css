@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Ubuntu:500&subset=latin,latin-ext);
 @import url('https://fonts.googleapis.com/css?family=Gelasio|Kulim+Park|Nanum+Myeongjo|Nanum+Gothic|Noto+Sans|Noto+Sans+KR|Roboto&display=swap');
-@import url('http://fonts.googleapis.com/earlyaccess/jejugothic.css');
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Titillium+Web:wght@300&display=swap');
 @import url(syntax/monokai.css);
 
@@ -31,8 +31,8 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Lobster", "Jeju Gothic";
-  --font-family-serif: "Jeju Gothic";
+  --font-family-sans-serif: "Roboto", "Nanum Gothic";
+  --font-family-serif: "Nanum Myeongjo";
 }
 
 * {
