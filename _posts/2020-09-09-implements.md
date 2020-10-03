@@ -2,7 +2,7 @@
 layout: post
 title:  "방향"
 date:   2020-09-08 19:31:29 +0900
-categories: implement
+categories: Implement
 ---
 # 1. 상하좌우
 
