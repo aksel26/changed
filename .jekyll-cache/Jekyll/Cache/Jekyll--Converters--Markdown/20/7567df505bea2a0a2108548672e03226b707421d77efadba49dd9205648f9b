@@ -1,0 +1,48 @@
+I"D<h1 id="boj-1427">BOJ 1427</h1>
+
+<h1 id="소트-인사이드">소트 인사이드</h1>
+
+<h3 id="-코드"><br /> 코드</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="c1">// int -&gt; string</span>
+    <span class="n">string</span> <span class="n">str</span><span class="p">;</span>
+    <span class="n">str</span> <span class="o">=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="c1">// 문자열 길이</span>
+    <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span>
+    
+    <span class="c1">// 분해된 문자열 담을 배열</span>
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="n">length</span><span class="p">];</span>
+
+    <span class="c1">//문자열 하나씩 담기</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 내림차순 정렬</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arr</span> <span class="o">+</span> <span class="n">length</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;</span><span class="p">());</span>
+
+    <span class="c1">// 아스키코드-&gt;숫자로 변환</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">48</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

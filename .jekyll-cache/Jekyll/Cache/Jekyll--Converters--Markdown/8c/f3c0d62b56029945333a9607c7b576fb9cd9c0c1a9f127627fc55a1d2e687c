@@ -1,0 +1,135 @@
+I"^ <h1 id="숫자의-총-개수-large">숫자의 총 개수 (Large)</h1>
+
+<h3 id="내-코드">내 코드</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">res</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">res</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">tmp</span> <span class="o">=</span> <span class="n">tmp</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">sum</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 입력</span>
+<span class="c1">// 15</span>
+<span class="c1">// 출력</span>
+<span class="c1">// 21</span>
+</code></pre></div></div>
+
+<h4 id="-접근방법"><br /> 접근방법</h4>
+
+<ol>
+  <li>0~ 9까지의 배열을 만들고</li>
+  <li>10 이상인 경우 10까지의 배열에는 +1씩 추가시킴</li>
+  <li>10 이상인 경우 각 자리수를 분해해 숫자에 맞는 인덱스에다가 1씩 증가시킴</li>
+</ol>
+
+<p><br /></p>
+
+<h4 id="문제점">문제점</h4>
+
+<p>숫자가 커지면 매우 오래걸리고 그 수를 담을 수 있는 공간이 부족하다.</p>
+
+<p><br /></p>
+
+<h3 id="solution">Solution</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">d</span><span class="p">);</span>
+        <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
+
+        <span class="c1">// 다음자리</span>
+        <span class="n">c</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="p">((</span><span class="n">n</span> <span class="o">-</span> <span class="n">sum</span><span class="p">)</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="접근-방법">접근 방법</h4>
+
+<p>한자리 숫자는</p>
+
+<p>0 부터 1까지는 9개</p>
+
+<p>두자리 숫자는</p>
+
+<p>10부터 99 까지는 90개</p>
+
+<p>세자리 숫자는</p>
+
+<p>100부터 999까지 900개</p>
+
+<p>네자리 숫자는</p>
+
+<p>1000 부터 9999 9000개</p>
+
+<hr />
+
+<p><em>1부터 256까지 숫자 개수는</em></p>
+
+<p>9보다 256이 큰지 확인,</p>
+
+<p>크면  <code class="highlighter-rouge">1 * 9.= 9</code> 개</p>
+
+<p>99보다 256이 큰지 확인,</p>
+
+<p>크면 <code class="highlighter-rouge">2 * 90 = 180</code>개</p>
+
+<p>999보다 256이 큰지 확인,</p>
+
+<p>크지 않으니 256에서 999를 뺀다. (<code class="highlighter-rouge"> 256 - 99 = 157</code>개, 세자리 숫자는 157개만 있다 )</p>
+
+<p><code class="highlighter-rouge">157 * 3 = 471</code></p>
+
+<p>총 개수는 <code class="highlighter-rouge">9 +.180 +.471 =.660</code>개가 된다.</p>
+:ET

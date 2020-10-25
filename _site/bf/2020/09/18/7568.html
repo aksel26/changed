@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="HM" /></head>
+<style>@import url(/public/css/syntax/monokai.css);</style>
+  <title>HM</title>
+  <!-- <link href="/public/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <link href="/public/css/style.css" rel="stylesheet">
+  <body>
+  	<div class="container"> 
+		<div class="sidebar">
+			<div class="sidebar-item sidebar-header">
+	<div class='sidebar-brand'>
+		<a href="/about/">HM</a>
+	</div>
+	<p class="lead">Coding Diary</p></div>
+
+<div class="sidebar-item sidebar-nav">
+	<ul class="nav">
+      <li class="nav-title">Pages</li>
+	  <li>
+	  	<a class="nav-item" href="/">Articles</a>
+	  </li>
+	  
+	  
+	    
+	  
+	    
+	      
+	        <li>
+	        	<a class="nav-item" href="/about/">
+	            	About
+	            </a>
+	        </li>
+	      
+	    
+	  
+	    
+	      
+	    
+	  
+	    
+	  
+	    
+	  
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-nav">
+  	<ul class="nav">
+			<li class="nav-title">Categories</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#greedy">
+				<span class="name">greedy</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Implement">
+				<span class="name">Implement</span>
+				<span class="badge">22</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BFS,DFS">
+				<span class="name">BFS,DFS</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#DFS">
+				<span class="name">DFS</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Greedy">
+				<span class="name">Greedy</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Sort">
+				<span class="name">Sort</span>
+				<span class="badge">4</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Recursion,">
+				<span class="name">Recursion,</span>
+				<span class="badge">1</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#BF">
+				<span class="name">BF</span>
+				<span class="badge">5</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Selection_Sort">
+				<span class="name">Selection_Sort</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Bubble_Sort">
+				<span class="name">Bubble_Sort</span>
+				<span class="badge">2</span>
+	    	</a>
+ 		</li>
+	    
+	    <li>
+	    	<a class="nav-item" href="/category/#Insertion_Sort">
+				<span class="name">Insertion_Sort</span>
+				<span class="badge">3</span>
+	    	</a>
+ 		</li>
+	    
+	  </nav>
+	</ul>
+</div>
+
+<div class="sidebar-item sidebar-footer">
+	<p>Powered by <a href="https://github.com/jekyll/jekyll">Jekyll</a></p>
+</div>
+		</div>
+		<div class="content">
+			<article class="post">
+	<header class="post-header">
+		<div class="post-title"> 
+			덩치
+		</div>
+		<time class="post-date dt-published" datetime="2020-09-18T13:31:29+09:00" itemprop="datePublished">2020/09/18
+		</time>		
+	</header>
+
+	<div class="post-content">
+		<h1 id="boj-7568">BOJ 7568</h1>
+
+<h2 id="덩치">덩치</h2>
+
+<h3 id="코드">코드</h3>
+
+<ol>
+  <li>pair를 이용해서 키와 몸무게를 입력받았다.</li>
+  <li>키와 몸무게를 각각 순차적으로 비교하며 순위를 매김</li>
+  <li>순위를 저장하기 위한 rank배열을 만들고 <code class="highlighter-rouge">fill_n</code>을 이용해 n사이즈 만큼 1로 채</li>
+  <li>기준이되는 <code class="highlighter-rouge">i</code>를 기준으로 <code class="highlighter-rouge">rank[i]++;</code> 를 하며 순위를 매김</li>
+  <li>문제는 순위 1등이 5가 나온다. 가장 덩치가 크니까 당연하다.
+    <ol>
+      <li>이를 해결하기 위해 5 = n  이므로 ranker[i] == n 이면 1로 바꾸기로 함.</li>
+      <li>하지만 꼴찌인 1을 해결할 수 없었다.</li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<p>Solution 을 참고해보면</p>
+
+<p><u>rank변수를 rank++;하고 기준이되는 i가 증가할때마다 출력하면 됐었다..</u></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="c1">// int ranker[n];</span>
+    <span class="c1">// fill_n(ranker, n, 1);</span>
+    <span class="kt">int</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">v</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">w</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">;</span>
+        <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+
+            <span class="c1">// cout&lt;&lt;"v[i] "&lt;&lt;v[i].first&lt;&lt;" "&lt;&lt;v[i].second&lt;&lt;endl;</span>
+            <span class="c1">// cout&lt;&lt;"v[j] "&lt;&lt;v[j].first&lt;&lt;" "&lt;&lt;v[j].second&lt;&lt;endl;</span>
+            <span class="c1">// if (i == j)</span>
+            <span class="c1">// {</span>
+            <span class="c1">//     continue;</span>
+            <span class="c1">// }</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span><span class="p">)</span>
+            <span class="p">{</span>
+
+                <span class="c1">// ranker[i]++;</span>
+                <span class="c1">// if (ranker[i] == n)</span>
+                <span class="c1">// {</span>
+                <span class="c1">//     ranker[i] = 1;</span>
+                <span class="c1">// }</span>
+
+                <span class="n">rank</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rank</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// for (int i = 0; i &lt; n; i++)</span>
+    <span class="c1">// {</span>
+
+    <span class="c1">//     cout &lt;&lt; ranker[i] &lt;&lt; ' ';</span>
+    <span class="c1">// }</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+	</div>
+</article>
+		</div>
+	</div>
+  </body>
+</html>

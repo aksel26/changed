@@ -1,0 +1,85 @@
+I"�<h1 id="boj-7568">BOJ 7568</h1>
+
+<h2 id="덩치">덩치</h2>
+
+<h3 id="코드">코드</h3>
+
+<ol>
+  <li>pair를 이용해서 키와 몸무게를 입력받았다.</li>
+  <li>키와 몸무게를 각각 순차적으로 비교하며 순위를 매김</li>
+  <li>순위를 저장하기 위한 rank배열을 만들고 <code class="highlighter-rouge">fill_n</code>을 이용해 n사이즈 만큼 1로 채</li>
+  <li>기준이되는 <code class="highlighter-rouge">i</code>를 기준으로 <code class="highlighter-rouge">rank[i]++;</code> 를 하며 순위를 매김</li>
+  <li>문제는 순위 1등이 5가 나온다. 가장 덩치가 크니까 당연하다.
+    <ol>
+      <li>이를 해결하기 위해 5 = n  이므로 ranker[i] == n 이면 1로 바꾸기로 함.</li>
+      <li>하지만 꼴찌인 1을 해결할 수 없었다.</li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<p>Solution 을 참고해보면</p>
+
+<p><u>rank변수를 rank++;하고 기준이되는 i가 증가할때마다 출력하면 됐었다..</u></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="c1">// int ranker[n];</span>
+    <span class="c1">// fill_n(ranker, n, 1);</span>
+    <span class="kt">int</span> <span class="n">rank</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">v</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">;</span>
+        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">w</span> <span class="o">&gt;&gt;</span> <span class="n">h</span><span class="p">;</span>
+        <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+
+            <span class="c1">// cout&lt;&lt;"v[i] "&lt;&lt;v[i].first&lt;&lt;" "&lt;&lt;v[i].second&lt;&lt;endl;</span>
+            <span class="c1">// cout&lt;&lt;"v[j] "&lt;&lt;v[j].first&lt;&lt;" "&lt;&lt;v[j].second&lt;&lt;endl;</span>
+            <span class="c1">// if (i == j)</span>
+            <span class="c1">// {</span>
+            <span class="c1">//     continue;</span>
+            <span class="c1">// }</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">second</span><span class="p">)</span>
+            <span class="p">{</span>
+
+                <span class="c1">// ranker[i]++;</span>
+                <span class="c1">// if (ranker[i] == n)</span>
+                <span class="c1">// {</span>
+                <span class="c1">//     ranker[i] = 1;</span>
+                <span class="c1">// }</span>
+
+                <span class="n">rank</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">rank</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// for (int i = 0; i &lt; n; i++)</span>
+    <span class="c1">// {</span>
+
+    <span class="c1">//     cout &lt;&lt; ranker[i] &lt;&lt; ' ';</span>
+    <span class="c1">// }</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

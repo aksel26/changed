@@ -1,0 +1,136 @@
+I"]"<h1 id="boj-2231">BOJ 2231</h1>
+
+<h2 id="분해합">분해합</h2>
+
+<h3 id="소스내꺼">소스(내꺼)</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+
+        <span class="kt">int</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">n2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="p">(</span><span class="n">n2</span> <span class="o">%</span> <span class="mi">10</span><span class="p">);</span>
+            <span class="n">n2</span> <span class="o">=</span> <span class="n">n2</span> <span class="o">/</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="p">}</span>
+
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="소스-sprintf">소스 (sprintf)</h3>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+
+    <span class="kt">long</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="kt">long</span> <span class="n">m</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">digit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="c1">// 자릿수 구하기</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">m</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">digit</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// 자릿수 별 최대 합을 빼고 난 후 부터 시작</span>
+    <span class="kt">long</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">digit</span> <span class="o">*</span> <span class="mi">9</span><span class="p">;</span>
+
+    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">find</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="n">begin</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// s배열에 자릿수별로 짤라서 들어감</span>
+        <span class="c1">// begin= 189라면, </span>
+        <span class="c1">// s[0] = 1, s[1] = 8, s[2] = 9</span>
+        <span class="n">sprintf</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">"%ld"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="n">sum</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">);</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="sc">'0'</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">find</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">find</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"0</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h4 id="문제-해결-과정">문제 해결 과정</h4>
+
+<ul>
+  <li>
+    <p>각 자릿수 별 최대 값은 9.</p>
+
+    <ul>
+      <li>각 자릿수마다의 최대 합은 <strong>9 * 원래 숫자의 자릿수</strong>
+        <ul>
+          <li>Ex) 254 는 3자리 이므로 최대 자릿수의 합은 9 + 9 + 9 = 27</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><br /></p>
+  </li>
+  <li>
+    <p>부분합의 검사 시작 숫자는 최대 자릿수 합 - 원래 숫자</p>
+
+    <ul>
+      <li><code class="highlighter-rouge">    long begin = n - digit * 9;</code></li>
+      <li>254 - 27 = 227. 227부터 시작한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<ul>
+  <li><code class="highlighter-rouge">sprint()</code> 로 문자열에 수치를 기록하고, 각 자리마다 숫자를 더해주는 방법 활용
+    <ul>
+      <li>배열에 각 인덱스별로 잘라서 하나씩 들어간다.</li>
+    </ul>
+  </li>
+</ul>
+:ET

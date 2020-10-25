@@ -1,0 +1,132 @@
+I"�"<h1 id="n에서-0의-개수">N!에서 0의 개수</h1>
+
+<h3 id="내-코드">내 코드</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+</span>
+<span class="kt">int</span> <span class="nf">fact</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">fact</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2147000</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">temp</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">%</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&gt;</span> <span class="n">max</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">max</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">temp</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">max</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>팩토리얼 값을 구하고</li>
+  <li>그 값을 자리수를 하나씩 비교하면서</li>
+  <li>
+    <p>0이면 <code class="highlighter-rouge">cnt++</code>  하고 최댓값으로 치환한다. 아니면 초기화.</p>
+  </li>
+  <li>문제점
+    <ul>
+      <li>입력 조건이 <code class="highlighter-rouge">10 &lt;= N &lt;= 1000</code> 인데</li>
+      <li>1000! 을 구하게 된다면</li>
+      <li>int형 범위 : <code class="highlighter-rouge">2^31-1</code> 을 초과하게 되어 담지 못한다. (다른 형도 마찬가지)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p><br /></p>
+
+<h3 id="solution">Solution</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;algorithm&gt;
+#include &lt;vector&gt;
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span><span class="p">,</span> <span class="n">cnt1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">%</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+                    <span class="n">cnt1</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">5</span><span class="p">)</span>
+                    <span class="n">cnt2</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">tmp</span> <span class="o">/=</span> <span class="n">j</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+                <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">cnt1</span> <span class="o">&lt;</span> <span class="n">cnt2</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cnt1</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">cnt2</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>소인수분해를 이용
+    <ul>
+      <li>5! = 1 * 2 * 3 * 4 * 5 에서</li>
+      <li>2는 <code class="highlighter-rouge">1 * 2</code>, 
+3은 <code class="highlighter-rouge">1 *3 </code>, 
+4는 <code class="highlighter-rouge">2 * 2</code>, 
+5는 <code class="highlighter-rouge">1 * 5</code>로 분해할 수 있다..</li>
+    </ul>
+  </li>
+  <li>숫자에 0을 결정하는 것은 10의 갯수다. ( <code class="highlighter-rouge">2* 5</code> )
+    <ul>
+      <li>저렇게 분해한 숫자들에서</li>
+      <li>2와 5를 발견하면 각각 <code class="highlighter-rouge">cnt2++, cnt5++;</code></li>
+      <li>그 중 작은 값의 변수를 출력하면된다.</li>
+    </ul>
+  </li>
+</ol>
+:ET
