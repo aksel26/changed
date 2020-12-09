@@ -2,7 +2,7 @@
 layout: post
 title:  "Priority_Queue"
 date:   2020-12-09 13:31:29 +0900
-categories: Priority_Queue
+categories: Queue
 ---
 # Priority_Queue
 
